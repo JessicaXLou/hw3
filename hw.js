@@ -14,13 +14,13 @@
       .attr('height', 500);
     // d3.csv is basically fetch but it can be be passed a csv file as a parameter
     d3.csv("dataEveryYear.csv")
-      .then((data) => makeScatterPlot(data, 1960));
+      .then((data) => makeScatterPlot(data));
   }
 
   // make scatter plot with trend line
-  function makeScatterPlot(csvData, year) {
+  function makeScatterPlot(csvData) {
     data = csvData; // assign data as global variable
-    filteredData = csvData.filter((row) => row.time == year);
+    filteredData = csvData.filter((row) => row.time == 1960);
 
     // get arrays of fertility rate data and life Expectancy data
     let fertility_rate_data = data.map((row) => parseFloat(row["fertility_rate"]));
@@ -53,8 +53,9 @@
 
     // add filter functionality to dropdown menu
     dropDown.on("change", function() {
-        filteredData = csvData.filter((row) => row.time == this.value)
-        plotData(mapFunctions, this.value);
+        let year = this.value;
+        filteredData = csvData.filter((row) => row.time == year);
+        plotData(mapFunctions);
     });
   }
 
