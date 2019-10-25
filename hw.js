@@ -30,14 +30,29 @@
     // draw axes and return scaling + mapping functions
     let mapFunctions = drawAxes(axesLimits, "fertility_rate", "life_expectancy");
 
-    // add dropdown menu
-    dropdown();
-
     // plot data as points and add tooltip functionality
     plotData(mapFunctions);
 
     // draw title and axes labels
     makeLabels();
+
+    // add dropdown menu
+    let dropDown = d3.select("#filter").append("select")
+        .attr("name", "year");
+    dropDown.on("change", function() {
+        let selected = this.value;
+        displayOthers = this.checked ? "inline" : "none";
+        display = this.checked ? "none" : "inline";
+
+
+        svg.selectAll(".circles")
+            .filter(function(d) {return selected != d.country;})
+            .attr("display", displayOthers);
+            
+        svg.selectAll(".circles")
+            .filter(function(d) {return selected == d.country;})
+            .attr("display", display);
+    });
   }
 
   // make title and axes labels
@@ -58,11 +73,6 @@
       .attr('transform', 'translate(15, 300)rotate(-90)')
       .style('font-size', '10pt')
       .text('Life Expectancy');
-  }
-
-  // create dropdown menu
-  function dropdown() {
-
   }
 
   // plot all the data points on the SVG
