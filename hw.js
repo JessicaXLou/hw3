@@ -30,6 +30,9 @@
     // draw axes and return scaling + mapping functions
     let mapFunctions = drawAxes(axesLimits, "fertility_rate", "life_expectancy");
 
+    // add dropdown menu
+    dropdown();
+
     // plot data as points and add tooltip functionality
     plotData(mapFunctions);
 
@@ -55,6 +58,11 @@
       .attr('transform', 'translate(15, 300)rotate(-90)')
       .style('font-size', '10pt')
       .text('Life Expectancy');
+  }
+
+  // create dropdown menu
+  function dropdown() {
+
   }
 
   // plot all the data points on the SVG
@@ -97,7 +105,7 @@
                     "<br/>" + 
                     "Population: " + numberWithCommas(d["pop_mlns"]*1000000) + 
                     "<br/>" + 
-                    "Year: " + d.year + 
+                    "Year: " + d.time + 
                     "<br/>" + 
                     "Life Expectancy:" + d["life_expectancy"] + 
                     "<br/>" + 
