@@ -3,6 +3,7 @@
 (function() {
 
   let data = "no data";
+  let filteredData = "no data"
   let svgContainer = ""; // keep SVG reference in global scope
 
   // load data and make scatter plot after window loads
@@ -18,7 +19,8 @@
 
   // make scatter plot with trend line
   function makeScatterPlot(csvData, year) {
-    data = csvData.filter((row) => row.time == year); // assign data as global variable
+    data = csvData; // assign data as global variable
+    filteredData = csvData.filter((row) => row.time == year);
 
     // get arrays of fertility rate data and life Expectancy data
     let fertility_rate_data = data.map((row) => parseFloat(row["fertility_rate"]));
@@ -51,6 +53,7 @@
 
     // add filter functionality to dropdown menu
     dropDown.on("change", function() {
+        filteredData = csvData.filter((row) => row.time == this.value)
         plotData(mapFunctions, this.value);
     });
   }
@@ -79,7 +82,7 @@
   // and add tooltip functionality
   function plotData(map) {
     // get population data as array
-    let pop_data = data.map((row) => +row["pop_mlns"]);
+    let pop_data = filteredData.map((row) => +row["pop_mlns"]);
     let pop_limits = d3.extent(pop_data);
     // make size scaling function for population
     let pop_map_func = d3.scaleLinear()
