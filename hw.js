@@ -56,11 +56,11 @@
         let display = this.checked ? "none" : "inline";
 
 
-        svg.selectAll(".circles")
+        svgContainer.selectAll(".circles")
             .filter(function(d) {return selected != d.time;})
             .attr("display", displayOthers);
             
-        svg.selectAll(".circles")
+        svgContainer.selectAll(".circles")
             .filter(function(d) {return selected == d.time;})
             .attr("display", display);
     });
