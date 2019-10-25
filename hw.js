@@ -39,6 +39,8 @@
     // add dropdown menu
     let dropDown = d3.select("#filter").append("select")
         .attr("name", "time");
+
+    // add options to dropdown menu
     var options = dropDown.selectAll("option")
         .data(data)
         .enter()
@@ -46,10 +48,12 @@
 
     options.text(function (d) { return d.time; })
         .attr("value", function (d) { return d.time; });
+
+    // add filter functionality to dropdown menu
     dropDown.on("change", function() {
         let selected = this.value;
-        displayOthers = this.checked ? "inline" : "none";
-        display = this.checked ? "none" : "inline";
+        //displayOthers = this.checked ? "inline" : "none";
+        //display = this.checked ? "none" : "inline";
 
 
         svg.selectAll(".circles")
