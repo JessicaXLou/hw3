@@ -31,7 +31,7 @@
     let mapFunctions = drawAxes(axesLimits, "fertility_rate", "life_expectancy");
 
     // plot data as points and add tooltip functionality
-    plotData(mapFunctions);
+    plotData(mapFunctions, 1960);
 
     // draw title and axes labels
     makeLabels();
@@ -51,18 +51,7 @@
 
     // add filter functionality to dropdown menu
     dropDown.on("change", function() {
-        let selected = this.value;
-        let displayOthers = this.checked ? "inline" : "none";
-        let display = this.checked ? "none" : "inline";
-
-
-        svgContainer.selectAll(".circles")
-            .filter(function(d) {return selected != d.time;})
-            .attr("display", displayOthers);
-            
-        svgContainer.selectAll(".circles")
-            .filter(function(d) {return selected == d.time;})
-            .attr("display", display);
+        plotData(mapFunctions, this.value);
     });
   }
 
@@ -88,9 +77,9 @@
 
   // plot all the data points on the SVG
   // and add tooltip functionality
-  function plotData(map) {
+  function plotData(map, year) {
     // get population data as array
-    let pop_data = data.map((row) => +row["pop_mlns"]);
+    let pop_data = data.filter(row.time == year).map((row) => +row["pop_mlns"]);
     let pop_limits = d3.extent(pop_data);
     // make size scaling function for population
     let pop_map_func = d3.scaleLinear()
