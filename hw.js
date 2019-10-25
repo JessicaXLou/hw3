@@ -103,7 +103,7 @@
 
     // append data to SVG and plot as points
     svgContainer.selectAll('.dot')
-      .data(data)
+      .data(filteredData)
       .enter()
       .append('circle')
         .attr('cx', xMap)
