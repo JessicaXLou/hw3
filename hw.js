@@ -93,7 +93,15 @@
           div.transition()
             .duration(200)
             .style("opacity", .9);
-          div.html(d.location + "<br/>" + numberWithCommas(d["pop_mlns"]*1000000))
+          div.html("Country: " + d.location + 
+                    "<br/>" + 
+                    "Population: " + numberWithCommas(d["pop_mlns"]*1000000) + 
+                    "<br/>" + 
+                    "Year: " + d.year + 
+                    "<br/>" + 
+                    "Life Expectancy:" + d["life_expectancy"] + 
+                    "<br/>" + 
+                    "Fertility:" + d["fertility_rate"])
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 28) + "px");
         })
