@@ -13,12 +13,12 @@
       .attr('height', 500);
     // d3.csv is basically fetch but it can be be passed a csv file as a parameter
     d3.csv("dataEveryYear.csv")
-      .then((data) => makeScatterPlot(data));
+      .then((data) => makeScatterPlot(data, 1960));
   }
 
   // make scatter plot with trend line
-  function makeScatterPlot(csvData) {
-    data = csvData // assign data as global variable
+  function makeScatterPlot(csvData, year) {
+    data = csvData.filter((row) => row.time == year); // assign data as global variable
 
     // get arrays of fertility rate data and life Expectancy data
     let fertility_rate_data = data.map((row) => parseFloat(row["fertility_rate"]));
@@ -31,7 +31,7 @@
     let mapFunctions = drawAxes(axesLimits, "fertility_rate", "life_expectancy");
 
     // plot data as points and add tooltip functionality
-    plotData(mapFunctions, 1960);
+    plotData(mapFunctions);
 
     // draw title and axes labels
     makeLabels();
@@ -77,10 +77,9 @@
 
   // plot all the data points on the SVG
   // and add tooltip functionality
-  function plotData(map, year) {
+  function plotData(map) {
     // get population data as array
     let pop_data = data.map((row) => +row["pop_mlns"]);
-    pop_data = pop_data.filter((row) => row.time == year);
     let pop_limits = d3.extent(pop_data);
     // make size scaling function for population
     let pop_map_func = d3.scaleLinear()
