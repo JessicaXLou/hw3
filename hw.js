@@ -52,8 +52,8 @@
     // add filter functionality to dropdown menu
     dropDown.on("change", function() {
         let selected = this.value;
-        //displayOthers = this.checked ? "inline" : "none";
-        //display = this.checked ? "none" : "inline";
+        let displayOthers = this.checked ? "inline" : "none";
+        let display = this.checked ? "none" : "inline";
 
 
         svg.selectAll(".circles")
