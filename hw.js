@@ -79,7 +79,8 @@
   // and add tooltip functionality
   function plotData(map, year) {
     // get population data as array
-    let pop_data = data.filter((row) => row.time == year).map((row) => +row["pop_mlns"]);
+    let pop_data = data.map((row) => +row["pop_mlns"]);
+    pop_data = pop_data.filter((row) => row.time == year);
     let pop_limits = d3.extent(pop_data);
     // make size scaling function for population
     let pop_map_func = d3.scaleLinear()
