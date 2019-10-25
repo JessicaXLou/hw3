@@ -38,7 +38,7 @@
 
     // add dropdown menu
     let dropDown = d3.select("#filter").append("select")
-        .attr("name", "year");
+        .attr("name", "time");
     dropDown.on("change", function() {
         let selected = this.value;
         displayOthers = this.checked ? "inline" : "none";
@@ -46,11 +46,11 @@
 
 
         svg.selectAll(".circles")
-            .filter(function(d) {return selected != d.country;})
+            .filter(function(d) {return selected != d.time;})
             .attr("display", displayOthers);
             
         svg.selectAll(".circles")
-            .filter(function(d) {return selected == d.country;})
+            .filter(function(d) {return selected == d.time;})
             .attr("display", display);
     });
   }
