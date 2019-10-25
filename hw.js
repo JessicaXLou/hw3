@@ -128,9 +128,9 @@
                     "<br/>" + 
                     "Year: " + d.time + 
                     "<br/>" + 
-                    "Life Expectancy:" + d["life_expectancy"] + 
+                    "Life Expectancy: " + d["life_expectancy"] + 
                     "<br/>" + 
-                    "Fertility:" + d["fertility_rate"])
+                    "Fertility: " + d["fertility_rate"])
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 28) + "px");
         })
