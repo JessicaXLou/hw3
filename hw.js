@@ -39,6 +39,13 @@
     // add dropdown menu
     let dropDown = d3.select("#filter").append("select")
         .attr("name", "time");
+    var options = dropDown.selectAll("option")
+        .data(data)
+        .enter()
+        .append("option");
+
+    options.text(function (d) { return d.time; })
+        .attr("value", function (d) { return d.time; });
     dropDown.on("change", function() {
         let selected = this.value;
         displayOthers = this.checked ? "inline" : "none";
