@@ -53,8 +53,23 @@
 
     // add filter functionality to dropdown menu
     dropDown.on("change", function() {
+        // remove previous points
+        svgContainer.selectAll('.point')
+            .data(function(d, index) {     
+                var a = [];
+                d.forEach(function(point,i) {
+                    a.push({'index': index, 'point': point});
+                });   
+                    return a;
+                })
+            .exit()
+            .remove();
+
+        // change filtered data
         let year = this.value;
         filteredData = csvData.filter((row) => row.time == year);
+
+        //plot new points
         plotData(mapFunctions);
     });
   }
@@ -106,6 +121,7 @@
       .data(filteredData)
       .enter()
       .append('circle')
+        .attr('class', 'point')
         .attr('cx', xMap)
         .attr('cy', yMap)
         .attr('r', (d) => pop_map_func(d["pop_mlns"]))
