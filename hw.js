@@ -54,16 +54,7 @@
     // add filter functionality to dropdown menu
     dropDown.on("change", function() {
         // remove previous points
-        svgContainer.selectAll('.point')
-            .data(function(d, index) {     
-                var a = [];
-                d.forEach(function(point,i) {
-                    a.push({'index': index, 'point': point});
-                });   
-                    return a;
-                })
-            .exit()
-            .remove();
+        svgContainer.selectAll('.point').remove();
 
         // change filtered data
         let year = this.value;
